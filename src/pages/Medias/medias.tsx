@@ -1,7 +1,9 @@
+import Table from "../../components/Table/table";
+
 export default function Medias() {
-    return(
-        <div>
-            
-        </div>
-    )
+  return (
+    <div>
+      <Table />
+    </div>
+  );
 }

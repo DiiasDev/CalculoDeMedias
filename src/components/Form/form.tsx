@@ -32,7 +32,7 @@ export default function Form() {
               </div>
               
               <div className={styles.formActions}>
-                <div></div> {/* Spacer para alinhamento */}
+                <div></div> 
                 <button 
                   type="button" 
                   className={styles.nextButton}
@@ -62,6 +62,11 @@ export default function Form() {
               <div className={styles.formGroup}>
                 <label htmlFor="nota3">Digite a terceira nota</label>
                 <input type="text" id="nota3" />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="nota4">Digite a quarta nota</label>
+                <input type="text" id="nota4" />
               </div>
               
               <div className={styles.formActions}>
