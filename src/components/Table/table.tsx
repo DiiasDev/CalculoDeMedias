@@ -11,11 +11,21 @@ export default function Table(props: TableProps) {
     <div className={styles.container}>
       <h3 className={styles.title}>Tabela de Alunos</h3>
 
-      <div className={styles.filterContainer}>
-        <select name="filtro" id="filtro" className={styles.filter}>
-            <option value="Aprovado">Aprovado</option>
-            <option value="Reprovado">Reprovado</option>
-        </select>
+      <div className={styles.filterGroup}>
+        <div className={styles.filterContainer}>
+          <select name="filtro-status" id="filtro-status" className={styles.filter}>
+              <option value="Aprovado">Aprovado</option>
+              <option value="Reprovado">Reprovado</option>
+          </select>
+        </div>
+
+        <div className={styles.filterContainer}>
+          <select name="filtro-serie" id="filtro-serie" className={styles.filter}>
+              <option value="1 ao 5">1° ao 5° Ano</option>
+              <option value="6° ao 9° Ano">6° ao 9° Ano</option>
+              <option value="1° ao 3° Ano médio">1° ao 3° Ano médio</option>
+          </select>
+        </div>
       </div>
 
       <div className={styles.tableContainer}>
