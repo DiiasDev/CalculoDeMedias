@@ -1,0 +1,27 @@
+/* Light mode */
+:root {
+    --bg: #F5F6FA;
+    --card-bg: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #555F6B;
+    --primary: #2962FF;
+    --secondary: #00B8D9;
+    --success: #43A047;
+    --error: #E53935;
+    --warning: #FFB300;
+    --divider: #E0E3EB;
+  }
+  
+  /* Dark mode */
+  [data-theme="dark"] {
+    --bg: #181A20;
+    --card-bg: #23272F;
+    --text: #F5F6FA;
+    --text-secondary: #AEB4C0;
+    --primary: #82B1FF;
+    --secondary: #00B8D9;
+    --success: #66BB6A;
+    --error: #EF5350;
+    --warning: #FFD54F;
+    --divider: #31343C;
+  }
