@@ -1,7 +1,7 @@
 .navContainer {
   width: 100%;
   background-color: #2c3e50;
-  padding: 15px 0;
+  padding: 1rem 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -27,6 +27,18 @@
 .navButton:hover {
   background-color: #3498db;
   transform: translateY(-2px);
+}
+
+.active {
+  font-weight: bold;
+  color: blue;
+  /* ou qualquer outro destaque */
+}
+
+.contentArea {
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 1200px;
 }
 
 @media (max-width: 600px) {

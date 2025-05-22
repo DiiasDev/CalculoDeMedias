@@ -1,7 +1,9 @@
 export default function CalcMedia() {
-    return(
-        <div>
-            
-        </div>
-    )
+  return (
+    <>
+      <div>
+        <h2>Calculo de Médias</h2>
+      </div>
+    </>
+  );
 }

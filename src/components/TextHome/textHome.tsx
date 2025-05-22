@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import Navigation from "../Navigation/navigation";
 
 export default function TextHome() {
   return (
@@ -12,10 +11,6 @@ export default function TextHome() {
           acompanhamento do desempenho acadêmico, ajudando educadores a tomar
           decisões baseadas em dados.
         </p>
-        <div>
-          <Navigation />
-        </div>
-
         <div className={styles.featuresSection}>
           <h2>Principais Recursos</h2>
           <div className={styles.featuresGrid}>
