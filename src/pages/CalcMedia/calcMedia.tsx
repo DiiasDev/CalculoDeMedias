@@ -1,13 +1,11 @@
 import Form from "../../components/Form/form";
+import styles from "./styles.module.css";
 
 export default function CalcMedia() {
   return (
-    <>
-      <div>
-        <h2>Calculo de Médias</h2>
-
-        <Form />
-      </div>
-    </>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Calculo de Médias</h2>
+      <Form />
+    </div>
   );
 }

@@ -1,78 +1,89 @@
 .formContainer {
   max-width: 600px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  background-color: #ffffff;
+  padding: 20px;
+  background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Limit height to 80% of viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .formTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1.5rem;
   text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .stepIndicator {
   display: flex;
+  margin-bottom: 20px;
   justify-content: center;
-  margin-bottom: 2rem;
+  align-items: center;
+  position: relative;
 }
 
 .step {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #e2e8f0;
-  color: #64748b;
+  background-color: #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 8px;
-  font-weight: 600;
+  margin: 0 20px;
+  font-weight: bold;
   position: relative;
+  z-index: 2;
 }
 
 .step.active {
-  background-color: #3b82f6;
+  background-color: #4caf50;
   color: white;
 }
 
-.step:not(:last-child)::after {
+.stepIndicator::before {
   content: '';
-  height: 2px;
-  width: 30px;
-  background-color: #e2e8f0;
   position: absolute;
-  right: -30px;
   top: 50%;
+  left: calc(25% + 15px);
+  right: calc(25% + 15px);
+  height: 2px;
+  background-color: #e0e0e0;
+  z-index: 1;
   transform: translateY(-50%);
 }
 
-.step.active:not(:last-child)::after {
-  background-color: #3b82f6;
+.formContent {
+  overflow-y: auto; /* Enable scrolling for the form content */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-height: calc(80vh - 70px); /* Account for stepIndicator height */
+  width: 100%; /* Constrain width to container */
 }
 
 .formGroup {
-  margin-bottom: 1.5rem;
+  margin-bottom: 15px;
+  width: 100%;
 }
 
 .formGroup label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #4b5563;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+  word-wrap: break-word; /* Allow long labels to wrap */
 }
 
 .formGroup input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  padding: 10px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 1rem;
-  transition: border-color 0.2s;
+  font-size: 16px;
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .formGroup input:focus {
@@ -84,20 +95,26 @@
 .formActions {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.formActions button {
-  padding: 0.75rem 1.5rem;
+.backButton,
+.nextButton {
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  font-weight: bold;
+}
+
+.backButton {
+  background-color: #f1f1f1;
+  color: #333;
 }
 
 .nextButton {
-  background-color: #3b82f6;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -105,17 +122,28 @@
   background-color: #2563eb;
 }
 
-.backButton {
-  background-color: #e2e8f0;
-  color: #4b5563;
-}
-
 .backButton:hover {
   background-color: #cbd5e1;
 }
 
-.formContent {
-  animation: fadeIn 0.3s ease-in-out;
+.resultado {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word; /* Allow text to wrap */
+}
+
+.aprovado {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.reprovado {
+  color: #f44336;
+  font-weight: bold;
 }
 
 @keyframes fadeIn {

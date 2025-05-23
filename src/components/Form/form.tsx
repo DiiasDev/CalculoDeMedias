@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import { useState } from "react";
+import Alert from "../Alert/Alert";
 
 export default function Form() {
   const [step, setStep] = useState(1);
@@ -12,6 +13,11 @@ export default function Form() {
     media: "",
   });
   const [resultadoExibido, setResultadoExibido] = useState(false);
+  const [alert, setAlert] = useState<{ show: boolean; message: string; type: "success" | "error" | "warning" | "info" }>({
+    show: false,
+    message: "",
+    type: "info"
+  });
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -41,16 +47,12 @@ export default function Form() {
 
   const handleNextStep = (event: React.FormEvent) => {
     event.preventDefault();
-
-    // Form validation happens automatically due to required attributes
-    // If we get here, the form is valid
     setStep(2);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    // All inputs are required, so if we're here, the form is valid
     const mediaCalculada = calcularMedia(aluno.notas);
 
     setAluno((prevAluno: any) => ({
@@ -70,20 +72,35 @@ export default function Form() {
     );
 
     if (alreadyExists) {
-      alert("Aluno já cadastrado");
+      setAlert({
+        show: true,
+        message: "Aluno já cadastrado",
+        type: "error"
+      });
       return setResultadoExibido(false);
     }
     alunosSaved.push(alunoAtualizado);
 
     localStorage.setItem("alunos", JSON.stringify(alunosSaved));
-
-    console.log("alunosSaved: ", alunosSaved);
-
+    
+    setAlert({
+      show: true,
+      message: "Aluno cadastrado com sucesso",
+      type: "success"
+    });
     setResultadoExibido(true);
   };
 
   return (
     <div className={styles.formContainer}>
+      {alert.show && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert({ ...alert, show: false })}
+        />
+      )}
+      
       <div className={styles.stepIndicator}>
         <div className={`${styles.step} ${step === 1 ? styles.active : ""}`}>
           1
