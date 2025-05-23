@@ -23,6 +23,10 @@
   position: relative;
 }
 
+.cabecalho{
+  text-align: center !important;
+}
+
 .filterContainer::before {
   content: attr(data-label);
   font-size: 14px;

@@ -11,6 +11,7 @@ export default function Form() {
     serie: "",
     notas: ["", "", "", ""],
     media: "",
+    status: ""
   });
   const [resultadoExibido, setResultadoExibido] = useState(false);
   const [alert, setAlert] = useState<{
@@ -80,15 +81,18 @@ export default function Form() {
     }
 
     const mediaCalculada = calcularMedia(aluno.notas);
+    const statusCalculado = mediaCalculada >= 6 ? "Aprovado" : "Reprovado";
 
     setAluno((prevAluno: any) => ({
       ...prevAluno,
       media: mediaCalculada,
+      status: statusCalculado,
     }));
 
     const alunoAtualizado = {
       ...aluno,
       media: mediaCalculada,
+      status: statusCalculado,
     };
 
     let alunosSaved = JSON.parse(localStorage.getItem("alunos") || "[]");
@@ -233,9 +237,9 @@ export default function Form() {
                     <strong>{aluno.media}</strong>
                   </p>
                   {Number(aluno.media) >= 6 ? (
-                    <p className={styles.aprovado}>Situação: Aprovado</p>
+                    <p className={styles.aprovado}>Situação: {aluno.status}</p>
                   ) : (
-                    <p className={styles.reprovado}>Situação: Reprovado</p>
+                    <p className={styles.reprovado}>Situação: {aluno.status}</p>
                   )}
                 </div>
               )}

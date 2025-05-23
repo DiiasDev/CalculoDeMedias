@@ -1,29 +1,58 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type TableProps = {
   headers?: string[];
   data?: string[][];
 };
 
+type Aluno = {
+  nome: string;
+  sobrenome: string;
+  serie: string;
+  media: number;
+  status: string;
+  ra: number;
+};
+
 export default function Table(props: TableProps) {
+  const [alunos, setAlunos] = useState<Aluno[]>([]);
+
+  const getDados = () => {
+    const alunosData = JSON.parse(localStorage.getItem("alunos") || "[]");
+    setAlunos(alunosData);
+  };
+
+  useEffect(() => {
+    console.log("Montei o componente");
+    getDados();
+  }, []);
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Tabela de Alunos</h3>
 
       <div className={styles.filterGroup}>
         <div className={styles.filterContainer}>
-          <select name="filtro-status" id="filtro-status" className={styles.filter}>
-              <option value="Aprovado">Aprovado</option>
-              <option value="Reprovado">Reprovado</option>
+          <select
+            name="filtro-status"
+            id="filtro-status"
+            className={styles.filter}
+          >
+            <option value="Aprovado">Aprovado</option>
+            <option value="Reprovado">Reprovado</option>
           </select>
         </div>
 
         <div className={styles.filterContainer}>
-          <select name="filtro-serie" id="filtro-serie" className={styles.filter}>
-              <option value="1 ao 5">1° ao 5° Ano</option>
-              <option value="6° ao 9° Ano">6° ao 9° Ano</option>
-              <option value="1° ao 3° Ano médio">1° ao 3° Ano médio</option>
+          <select
+            name="filtro-serie"
+            id="filtro-serie"
+            className={styles.filter}
+          >
+            <option value="1 ao 5">1° ao 5° Ano</option>
+            <option value="6° ao 9° Ano">6° ao 9° Ano</option>
+            <option value="1° ao 3° Ano médio">1° ao 3° Ano médio</option>
           </select>
         </div>
       </div>
@@ -32,43 +61,41 @@ export default function Table(props: TableProps) {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Status</th>
-              <th>Aluno</th>
-              <th>Série</th>
-              <th>Média</th>
+              <th className={styles.cabecalho}>Status</th>
+              <th className={styles.cabecalho}>Aluno</th>
+              <th className={styles.cabecalho}>Série</th>
+              <th className={styles.cabecalho}>Média</th>
+              <th className={styles.cabecalho}>RA</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <div className={`${styles.statusContainer} ${styles.aprovado}`}>
-                  Aprovado
-                </div>
-              </td>
-              <td>João Silva</td>
-              <td>9º ano</td>
-              <td>8.5</td>
-            </tr>
-            <tr>
-              <td>
-                <div className={`${styles.statusContainer} ${styles.reprovado}`}>
-                  Reprovado
-                </div>
-              </td>
-              <td>Maria Santos</td>
-              <td>8º ano</td>
-              <td>5.5</td>
-            </tr>
-            <tr>
-              <td>
-                <div className={`${styles.statusContainer} ${styles.aprovado}`}>
-                  Aprovado
-                </div>
-              </td>
-              <td>Pedro Souza</td>
-              <td>7º ano</td>
-              <td>7.8</td>
-            </tr>
+            {alunos.length > 0 ? (
+              alunos.map((aluno, index) => (
+                <tr key={index}>
+                  <td>
+                    <div
+                      className={`${styles.statusContainer} ${
+                        aluno.status === "Aprovado"
+                          ? styles.aprovado
+                          : styles.reprovado
+                      }`}
+                    >
+                      {aluno.status}
+                    </div>
+                  </td>
+                  <td>{aluno.nome} {aluno.sobrenome}</td>
+                  <td>{aluno.serie}</td>
+                  <td>{aluno.media}</td>
+                  <td>{aluno.ra}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} style={{ textAlign: "center" }}>
+                  Nenhum aluno cadastrado
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
