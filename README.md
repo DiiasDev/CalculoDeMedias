@@ -50,4 +50,4 @@ LINK: https://sistemadecalculodemedias.netlify.app/
 ![image](https://github.com/user-attachments/assets/80a9e441-6f4b-489d-a3c2-d4f6c168ecad)
 
 
-Desenvolvido com ❤️ por Seu Nome
+Desenvolvido com ❤️ por DiiasDev
