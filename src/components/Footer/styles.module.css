@@ -30,3 +30,50 @@
   margin-top: 10px;
   font-size: 0.9rem;
 }
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 10px 0;
+  }
+
+  .footerContent {
+    padding: 0 10px;
+  }
+
+  .footerContent h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+
+  .footerContent p {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+
+  .footerBottom {
+    padding-top: 5px;
+    margin-top: 5px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Media query for very small screens */
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 8px 0;
+  }
+
+  .footerContent h3 {
+    font-size: 1rem;
+  }
+
+  .footerContent p {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+
+  .footerBottom {
+    font-size: 0.7rem;
+  }
+}

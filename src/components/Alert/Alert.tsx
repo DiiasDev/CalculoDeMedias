@@ -36,6 +36,10 @@ const Alert = ({ message, type, onClose, autoClose = 3000 }: AlertProps) => {
         <button className={styles.closeButton} onClick={handleClose}>
           <span>×</span>
         </button>
+        <div 
+          className={styles.loadingBar} 
+          style={{ animation: `${styles.shrink} ${autoClose}ms linear forwards` }}
+        ></div>
       </div>
     </div>
   );

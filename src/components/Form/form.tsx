@@ -13,10 +13,14 @@ export default function Form() {
     media: "",
   });
   const [resultadoExibido, setResultadoExibido] = useState(false);
-  const [alert, setAlert] = useState<{ show: boolean; message: string; type: "success" | "error" | "warning" | "info" }>({
+  const [alert, setAlert] = useState<{
+    show: boolean;
+    message: string;
+    type: "success" | "error" | "warning" | "info";
+  }>({
     show: false,
     message: "",
-    type: "info"
+    type: "info",
   });
 
   const handleInputChange = (event: any) => {
@@ -53,6 +57,28 @@ export default function Form() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    const raInvalido = isNaN(Number(aluno.ra));
+    if (raInvalido) {
+      setAlert({
+        show: true,
+        message: "Valor inesperado para RA",
+        type: "error",
+      });
+      setResultadoExibido(false);
+      return;
+    }
+
+    const notasInvalidas = aluno.notas.some((nota) => isNaN(parseFloat(nota)));
+    if (notasInvalidas) {
+      setAlert({
+        show: true,
+        message: "Valor inesperado para notas",
+        type: "error",
+      });
+      setResultadoExibido(false);
+      return;
+    }
+
     const mediaCalculada = calcularMedia(aluno.notas);
 
     setAluno((prevAluno: any) => ({
@@ -75,19 +101,20 @@ export default function Form() {
       setAlert({
         show: true,
         message: "Aluno já cadastrado",
-        type: "error"
+        type: "error",
       });
       return setResultadoExibido(false);
     }
     alunosSaved.push(alunoAtualizado);
 
     localStorage.setItem("alunos", JSON.stringify(alunosSaved));
-    
+
     setAlert({
       show: true,
       message: "Aluno cadastrado com sucesso",
-      type: "success"
+      type: "success",
     });
+
     setResultadoExibido(true);
   };
 
@@ -100,7 +127,7 @@ export default function Form() {
           onClose={() => setAlert({ ...alert, show: false })}
         />
       )}
-      
+
       <div className={styles.stepIndicator}>
         <div className={`${styles.step} ${step === 1 ? styles.active : ""}`}>
           1
@@ -161,10 +188,7 @@ export default function Form() {
               </div>
               <div className={styles.formActions}>
                 <div></div>
-                <button
-                  type="submit"
-                  className={styles.nextButton}
-                >
+                <button type="submit" className={styles.nextButton}>
                   Próximo
                 </button>
               </div>
@@ -196,10 +220,7 @@ export default function Form() {
                 >
                   Voltar
                 </button>
-                <button
-                  type="submit"
-                  className={styles.nextButton}
-                >
+                <button type="submit" className={styles.nextButton}>
                   Calcular
                 </button>
               </div>
