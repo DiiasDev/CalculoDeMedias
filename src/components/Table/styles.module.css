@@ -141,4 +141,95 @@
   .filterGroup {
     flex-direction: column;
   }
+
+  .table thead {
+    display: none;
+  }
+
+  .table, 
+  .table tbody, 
+  .table tr, 
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #eee;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .mobileCardLabel {
+    font-weight: bold;
+    color: #555;
+    display: inline-block;
+    width: 40%;
+    text-align: left;
+  }
+
+  .mobileCardValue {
+    display: inline-block;
+    width: 60%;
+    text-align: right;
+  }
+
+  .mobileCard {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    padding: 15px;
+    border-left: 5px solid #ddd;
+  }
+
+  .mobileCard.aprovado {
+    border-left-color: #3c763d;
+  }
+
+  .mobileCard.reprovado {
+    border-left-color: #a94442;
+  }
+
+  .statusContainer {
+    width: auto;
+    display: inline-block;
+  }
+
+  .mobileCardRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .mobileCardRow:last-child {
+    border-bottom: none;
+  }
+  
+  .tableContainer {
+    box-shadow: none;
+  }
 }
