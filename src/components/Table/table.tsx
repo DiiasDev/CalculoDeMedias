@@ -17,6 +17,8 @@ type Aluno = {
 
 export default function Table(props: TableProps) {
   const [alunos, setAlunos] = useState<Aluno[]>([]);
+  const [filtroStatus, setFiltroStatus] = useState("Todos");
+  const [filtroSerie, setFiltroSerie] = useState("Todos");
 
   const getDados = () => {
     const alunosData = JSON.parse(localStorage.getItem("alunos") || "[]");
@@ -28,6 +30,13 @@ export default function Table(props: TableProps) {
     getDados();
   }, []);
 
+  const alunosFiltrados = alunos.filter((aluno) => {
+    if (filtroStatus !== "Todos" && aluno.status !== filtroStatus) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Tabela de Alunos</h3>
@@ -38,21 +47,12 @@ export default function Table(props: TableProps) {
             name="filtro-status"
             id="filtro-status"
             className={styles.filter}
+            value={filtroStatus}
+            onChange={(e) => setFiltroStatus(e.target.value)}
           >
+            <option value="Todos">Todos</option>
             <option value="Aprovado">Aprovado</option>
             <option value="Reprovado">Reprovado</option>
-          </select>
-        </div>
-
-        <div className={styles.filterContainer}>
-          <select
-            name="filtro-serie"
-            id="filtro-serie"
-            className={styles.filter}
-          >
-            <option value="1 ao 5">1° ao 5° Ano</option>
-            <option value="6° ao 9° Ano">6° ao 9° Ano</option>
-            <option value="1° ao 3° Ano médio">1° ao 3° Ano médio</option>
           </select>
         </div>
       </div>
@@ -69,8 +69,8 @@ export default function Table(props: TableProps) {
             </tr>
           </thead>
           <tbody>
-            {alunos.length > 0 ? (
-              alunos.map((aluno, index) => (
+            {alunosFiltrados.length > 0 ? (
+              alunosFiltrados.map((aluno, index) => (
                 <tr key={index}>
                   <td>
                     <div
@@ -83,7 +83,9 @@ export default function Table(props: TableProps) {
                       {aluno.status}
                     </div>
                   </td>
-                  <td>{aluno.nome} {aluno.sobrenome}</td>
+                  <td>
+                    {aluno.nome} {aluno.sobrenome}
+                  </td>
                   <td>{aluno.serie}</td>
                   <td>{aluno.media}</td>
                   <td>{aluno.ra}</td>
@@ -91,8 +93,8 @@ export default function Table(props: TableProps) {
               ))
             ) : (
               <tr>
-                <td colSpan={4} style={{ textAlign: "center" }}>
-                  Nenhum aluno cadastrado
+                <td colSpan={5} style={{ textAlign: "center" }}>
+                  Nenhum aluno encontrado com os filtros selecionados
                 </td>
               </tr>
             )}
